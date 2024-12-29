@@ -1,0 +1,30 @@
+/* CSS Gerais */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+}
+
+/* CSS dos coantroles */
+
+/* CSS rua */
+
+.rua {
+    display: flex;
+    height: 100px;
+    align-items: center;
+    gap: 30px;
+    background-color: #777;
+}
+
+.rua > .faixa {
+    flex: 1;
+    height: 10px;
+    background-color: #DDD;
+}
