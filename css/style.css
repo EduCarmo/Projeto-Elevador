@@ -9,9 +9,22 @@ body {
     display: flex;
     flex-direction: column;
     background-color: black;
+    height: 100vh;
+}
+
+.calcada {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    flex: 1;
 }
 
 /* CSS dos coantroles */
+
+.controles {
+    height: 100px;
+    background-color: #222;
+}
 
 /* CSS rua */
 
@@ -19,12 +32,37 @@ body {
     display: flex;
     height: 100px;
     align-items: center;
-    gap: 30px;
     background-color: #777;
+    gap: 30px;
+    border-top: 10px solid white;
 }
 
 .rua > .faixa {
     flex: 1;
     height: 10px;
     background-color: #DDD;
+}
+
+
+/* CSS arvore */
+
+.arvore {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.arvore::before {
+    content: '';
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: green;
+}
+
+.arvore::after {
+    content: '';
+    width: 20px;
+    height: 100px;
+    background-color: #4d3131;
 }
