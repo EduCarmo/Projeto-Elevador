@@ -7,18 +7,20 @@
 
         const terreo = document.createElement('div')
         terreo.classList.add('terreo')
+        terreo.setAttribute('andar', 't')
         terreo.appendChild(janela)
 
         return terreo
 
     }
 
-    function criarAndar() {
+    function criarAndar(numeroAndar) {
         const porta = document.createElement('div')
         porta.classList.add('porta')
 
         const andar = document.createElement('div')
         andar.classList.add('andar')
+        andar.setAttribute('andar', numeroAndar)
         andar.appendChild(porta)
 
         return andar
@@ -29,8 +31,8 @@
         elementosComAndares.forEach(elementosComAndares => {
             const qtde = +elementosComAndares.getAttribute('andares')
 
-            for (let i = 0; i < qtde; i++) {
-                elementosComAndares.appendChild(criarAndar())
+            for (let i = qtde; i > 0; i--) {
+                elementosComAndares.appendChild(criarAndar(i))
             }
 
             elementosComAndares.appendChild(criarTerreo())
