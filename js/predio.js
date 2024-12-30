@@ -28,14 +28,14 @@
 
     function criarPavimento() {
         const elementosComAndares = document.querySelectorAll('[andares]');
-        elementosComAndares.forEach(elementosComAndares => {
-            const qtde = +elementosComAndares.getAttribute('andares')
+        elementosComAndares.forEach(elemento => {
+            const qtde = +elemento.getAttribute('andares')
 
             for (let i = qtde; i > 0; i--) {
-                elementosComAndares.appendChild(criarAndar(i))
+                elemento.appendChild(criarAndar(i))
             }
 
-            elementosComAndares.appendChild(criarTerreo())
+            elemento.appendChild(criarTerreo())
         })
     }
 
@@ -50,30 +50,51 @@
 
     function criarElevador() {
         const poco = document.querySelector('.poco')
+        if (!poco) {
+            console.error('Poco nao encontrado')
+            return;
+        }
         const elevador = document.createElement('div')
         elevador.classList.add('elevador')
         elevador.style.height = `${obterTamanhoElevador()}px`
-
+        elevador.style.bottom = '0px'
         poco.appendChild(elevador)
     }
 
     function obterPosicaoAtual() {
         const elevador = document.querySelector('.elevador')
-        return +elevador.style.bottom.replace('px', '')
+        return parseInt(elevador.style.bottom.replace('px', '')) || 0
     }
 
     function atualizarMostrador(texto) {
         const mostrador = document.querySelector('.mostrador')
-        mostrador.innerHTML = texto
+        if(mostrador) {
+            mostrador.innerHTML = texto
+        }
     }
 
     function moverElevador(andar) {
         const numero = andar === 't' ? 0 : +andar
         const elevador = document.querySelector('.elevador')
-        
-        elevador.style.bottom = `${obterTamanhoElevador() * numero}px`
 
-        atualizarMostrador(andar === 't' ? 'Térreo' : `${andar} Andar`)
+        const posicaoInicial = obterPosicaoAtual()
+        const posicaoFinal = obterTamanhoElevador() * numero
+        const subindo = posicaoFinal > posicaoInicial
+
+        atualizarMostrador(subindo ? 'Subindo' : 'Descendo')
+
+        let temporizador = setInterval(() => {
+            const novaPosicao = obterPosicaoAtual() + (subindo ? 10 : -10)
+            const terminou = subindo ? novaPosicao >= posicaoFinal : novaPosicao <= posicaoFinal  
+            elevador.style.bottom = terminou ? `${posicaoFinal}px` : `${novaPosicao}px`;
+
+
+            if(terminou) {
+                clearInterval(temporizador)
+                atualizarMostrador(andar === 't' ? 'Térreo' : `${andar} Andar`)
+            }
+        }, 30)
+
     }
 
 
