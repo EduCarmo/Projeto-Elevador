@@ -41,8 +41,22 @@
 
     criarPavimento()
 
+
     // ---------------  Elevador  --------------- //
+    function obterTamanhoElevador() {
+        const terreo = document.querySelector('[andar="t"]')
+        return terreo.offsetHeight
+    }
 
+    function criarElevador() {
+        const poco = document.querySelector('.poco')
+        const elevador = document.createElement('div')
+        elevador.classList.add('elevador')
+        elevador.style.height = `${obterTamanhoElevador()}px`
 
+        poco.appendChild(elevador)
+    }
 
+    criarElevador()
+    
 })()
