@@ -55,7 +55,7 @@ body {
 }
 
 .controles button.destaque{
-    background-color: yellow;
+    border-color: yellow;
 }  
 
 /* CSS rua */
